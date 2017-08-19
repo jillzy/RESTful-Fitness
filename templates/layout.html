@@ -1,0 +1,44 @@
+<!doctype html>
+<script>
+function hi(x){
+//	alert( 'Hello, world!' );
+	alert( x );
+}
+
+function toggleMe(){
+	var e=document.getElementById('hidden');
+	if(!e)return true;
+	if(e.style.display=="none"){
+		e.style.display="block"
+	} else {
+		e.style.display="none"
+	}
+	return false;
+}
+
+</script>
+
+<title>be a fit person</title>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
+<div class=page>
+  <h1>be a fit person</h1>
+  <div class=metanav>
+  {% if not session.logged_in %}
+    <a href="{{ url_for('login') }}">log in</a>
+  {% else %}
+    <a href="{{ url_for('logout') }}">log out</a>
+  {% endif %}
+  </div>
+  {% for item in lifts%}
+    <div class=liftLinks>
+		<a id = "{{ 'liftLink' + loop.index0|string }}" href = "javascript:void(0);" 
+			onclick = "javascript:hi({{ loop.index0|string }}); toggleMe();">
+		{{ item }}
+		</a>
+		<div id = "hidden" style = "display:none">hidden stuff</div>
+	</div>
+  {% endfor %}
+  
+  {% block body %}{% endblock %}
+</div>
