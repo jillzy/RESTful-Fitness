@@ -1,17 +1,22 @@
 <!doctype html>
 <script>
 function hi(x){
-//	alert( 'Hello, world!' );
-	alert( x );
+	//eventualy this should be the toggle
 }
 
-function toggleMe(){
-	var e=document.getElementById('hidden');
+function toggleMe(id){
+	var e=document.getElementById('expansion');
+	var content = document.createTextNode(id);
+	e.appendChild(content);
+	
 	if(!e)return true;
 	if(e.style.display=="none"){
 		e.style.display="block"
 	} else {
 		e.style.display="none"
+		while(e.firstChild) {
+			e.removeChild(e.firstChild);
+		}
 	}
 	return false;
 }
@@ -33,12 +38,12 @@ function toggleMe(){
   {% for item in lifts%}
     <div class=liftLinks>
 		<a id = "{{ 'liftLink' + loop.index0|string }}" href = "javascript:void(0);" 
-			onclick = "javascript:hi({{ loop.index0|string }}); toggleMe();">
+			onclick = "javascript:toggleMe({{ loop.index0 }});">
 		{{ item }}
 		</a>
-		<div id = "hidden" style = "display:none">hidden stuff</div>
 	</div>
-  {% endfor %}
-  
-  {% block body %}{% endblock %}
+	{% endfor %}
+	<div id = "expansion" style = "display:none"></div>
+
+	{% block body %}{% endblock %}
 </div>
