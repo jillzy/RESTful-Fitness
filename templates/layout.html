@@ -5,6 +5,7 @@ function hi(x){
 }
 
 function toggleMe(id){
+//todo: make sure its toggling correctly
 	var e=document.getElementById('expansion');
 	var content = document.createTextNode(id);
 	e.appendChild(content);
@@ -21,8 +22,14 @@ function toggleMe(id){
 	return false;
 }
 
-</script>
 
+</script>
+<script
+			  src="https://code.jquery.com/jquery-3.2.1.js"
+			  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+			  crossorigin="anonymous"></script>
+			  
+			  
 <title>be a fit person</title>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 
@@ -37,9 +44,15 @@ function toggleMe(id){
   </div>
   {% for item in lifts%}
     <div class=liftLinks>
+		
 		<a id = "{{ 'liftLink' + loop.index0|string }}" href = "javascript:void(0);" 
-			onclick = "javascript:toggleMe({{ loop.index0 }});">
-		{{ item }}
+			onclick="	toggleMe({{ loop.index0 }});
+						<!--turn json obj into string-->
+						var data = JSON.stringify({'name': '{{ item }}' });
+						console.log(data);
+						jQuery.post('/action_page', data, function(data) { console.log('callback' + data) });
+					">
+			{{ item }}
 		</a>
 	</div>
 	{% endfor %}
