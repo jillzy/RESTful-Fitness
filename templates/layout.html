@@ -1,85 +1,30 @@
 <!doctype html>
-<script>
-var lastPressed;
-
-function hi(x){
-	//eventualy this should be the toggle
-}
-
-function toggleMe(item){
-//todo: make sure its toggling correctly
-	var clicked = document.getElementById(item+'Expansion');
-	var lastClicked = "";
-	if (lastPressed != null) {
-		lastClicked = document.getElementById(lastPressed+'Expansion');
-	}
-	var content = document.createTextNode(item + "variations");
-	
-	//our first click
-	if (lastClicked == "") { 
-		clicked.appendChild(content);
-		clicked.style.display = "block"
-
-	//nothing is currently opened
-	} else if (lastClicked.style.display == "none") {
-		clicked.appendChild(content);
-		clicked.style.display = "block";
- 
-	//something is currently opened
-	} else if (lastClicked.style.display == "block") {
-		console.log("b");
-		//we reclicked our last click
-		if (clicked == lastClicked) {
-			lastClicked.style.display = "none";
-			lastClicked.innerHTML = "";
- 
-		//and we clicked something else
-		} else if (clicked != lastClicked) {
-			lastClicked.style.display = "none";
-			lastClicked.innerHTML = "";
-			clicked.appendChild(content);
-			clicked.style.display = "block";
- 
-		}
-	}
-}
-
-function createExpansion(name) {
-	var div = document.createElement('div');
-	div.id = name+"Expansion";
-	div.style.border = '1px solid black';
-	div.style.position= 'absolute';
-	div.style.display = 'none';
-	document.body.appendChild(div);
-	return div;
-}
-
-</script>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
 <script
-			  src="https://code.jquery.com/jquery-3.2.1.js"
-			  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-			  crossorigin="anonymous"></script>
-			  
+	src="https://code.jquery.com/jquery-3.2.1.js"
+	integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+	crossorigin="anonymous">
+</script>
+<script src="{{url_for('static', filename='scripts.js')}}"></script>
 			  
 <title>be a fit person</title>
-<link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+
 
 <div class=page>
-  <h1>be a fit person</h1>
-  <div class=metanav>
-  {% if not session.logged_in %}
-    <a href="{{ url_for('login') }}">log in</a>
-  {% else %}
-    <a href="{{ url_for('logout') }}">log out</a>
-  {% endif %}
-  </div>
-  {% for item in lifts%}
-    <div class=liftLinks>
-		</script>
-		<a id = "{{ 'liftLink' + loop.index0|string }}" style = "position:relative;" href = "javascript:void(0);" 
+	<div class=metanav>
+		{% if not session.logged_in %}
+		<a href="{{ url_for('login') }}">log in</a>
+		{% else %}
+		<a href="{{ url_for('logout') }}">log out</a>
+		{% endif %}
+	</div>
+	
+	<div id= "liftLinksContainer">
+	{% for item in lifts%}
+		
+		<a id = "{{ 'liftLink' + loop.index0|string }}" class = "mainLinks" href = "javascript:void(0);" 
 			onclick="	
-						toggleMe('{{ item }}');
-						lastPressed = '{{ item }}';
+						toggle('{{ item }}');
 						//turn json obj into string
 						var data = JSON.stringify({'name': '{{ item }}' });
 						jQuery.post('/action_page', data, function(data) { return true; });
@@ -87,15 +32,14 @@ function createExpansion(name) {
 			{{ item }}
 		</a>
 		
-		<!--javascript that instantiates a div instead of below-->
 		<script>
-			document.getElementById('{{ 'liftLink' + loop.index0|string }}')
-				.appendChild(createExpansion('{{ item }}'));
-		
+			document.getElementById('liftLinksContainer')
+				.appendChild(document.getElementById('{{ "liftLink" + loop.index0|string }}'));		
+			document.getElementById('{{ "liftLink" + loop.index0|string }}')
+				.appendChild(createExpansion('{{ item }}'));		
 		</script>
-	</div>
 	{% endfor %}
-<!--	<div id = "expansion" style = "display:none"></div>-->
-
+	</div>
+	
 	{% block body %}{% endblock %}
 </div>
