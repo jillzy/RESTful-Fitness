@@ -13,11 +13,18 @@ def login():
 def action():
     #take string and parse/loads into json object
     data = json.loads(request.get_data())
-    print(data)
-    print(type(data))
-    benchVariations = ['Bench, Incline Bench, Dumbbell Press']
+    #print(data)
+    #print(type(data))
+    variations = {"Bench": ['Bench', 'Incline Bench', 'Dumbbell Press'],
+                  "Deadlift": ["all the lifts"],
+                  "Squat": ["all the squats"]}
+    for v in variations:
+        for k in data:
+            if data[k] == v:
+                return json.dumps(variations[v])
+    return "none"
     #turns json back into str
-    return json.dumps(data)
+    #return json.dumps(data)
 
 
 @app.route('/')

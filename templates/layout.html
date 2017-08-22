@@ -24,14 +24,14 @@
 		
 		<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
 			onmouseenter=	"	
-							toggle('{{ item }}');
-							//turn json obj into string
-							var data = JSON.stringify({'name': '{{ item }}' });
-							jQuery.post('/action_page', data, function(data) { return true; });
+								toggle('{{ item }}');
+								//turn json obj into string
+								var data = JSON.stringify({'name': '{{ item }}' });
+								var res = jQuery.post('/action_page', data, function(data) { return true; });
+								console.log(res);
 							"
-			onmouseleave=	"
-							toggle('{{ item }}');
-							"
+			
+			onmouseleave=	"toggle('{{ item }}');"
 		>
 			{{ item }}
 		</a>
