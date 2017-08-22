@@ -12,15 +12,15 @@ function toggle(item){
 	//our first click
 	if (lastClicked == "") { 
 		clicked.appendChild(content);
-		clicked.style.display = "block"
+		clicked.style.display = "inline-block"
 
 	//nothing is currently opened
 	} else if (lastClicked.style.display == "none") {
 		clicked.appendChild(content);
-		clicked.style.display = "block";
+		clicked.style.display = "inline-block";
  
 	//something is currently opened
-	} else if (lastClicked.style.display == "block") {
+	} else if (lastClicked.style.display == "inline-block") {
 		//we reclicked our last click
 		if (clicked == lastClicked) {
 			lastClicked.style.display = "none";
@@ -31,7 +31,7 @@ function toggle(item){
 			lastClicked.style.display = "none";
 			lastClicked.innerHTML = "";
 			clicked.appendChild(content);
-			clicked.style.display = "block";
+			clicked.style.display = "inline-block";
  
 		}
 	}
@@ -42,7 +42,7 @@ function createExpansion(name) {
 	var div = document.createElement('div');
 	div.id = name+"Expansion";
 	div.style.border = '1px solid black';
-	div.style.position= 'absolute';
+	div.style.position= 'relative';
 	div.onmouseup = dynamicEvent; //todo: eentuallyt his is the elements of the expansion
 	div.style.display = 'none';
 	document.body.appendChild(div);
