@@ -1,27 +1,58 @@
 <!doctype html>
 <script>
+var lastPressed;
+
 function hi(x){
 	//eventualy this should be the toggle
 }
 
-function toggleMe(id){
+function toggleMe(item){
 //todo: make sure its toggling correctly
-	var e=document.getElementById('expansion');
-	var content = document.createTextNode(id);
-	e.appendChild(content);
+	var clicked = document.getElementById(item+'Expansion');
+	var lastClicked = "";
+	if (lastPressed != null) {
+		lastClicked = document.getElementById(lastPressed+'Expansion');
+	}
+	var content = document.createTextNode(item + "variations");
 	
-	if(!e)return true;
-	if(e.style.display=="none"){
-		e.style.display="block"
-	} else {
-		e.style.display="none"
-		while(e.firstChild) {
-			e.removeChild(e.firstChild);
+	//our first click
+	if (lastClicked == "") { 
+		clicked.appendChild(content);
+		clicked.style.display = "block"
+
+	//nothing is currently opened
+	} else if (lastClicked.style.display == "none") {
+		clicked.appendChild(content);
+		clicked.style.display = "block";
+ 
+	//something is currently opened
+	} else if (lastClicked.style.display == "block") {
+		console.log("b");
+		//we reclicked our last click
+		if (clicked == lastClicked) {
+			lastClicked.style.display = "none";
+			lastClicked.innerHTML = "";
+ 
+		//and we clicked something else
+		} else if (clicked != lastClicked) {
+			lastClicked.style.display = "none";
+			lastClicked.innerHTML = "";
+			clicked.appendChild(content);
+			clicked.style.display = "block";
+ 
 		}
 	}
-	return false;
 }
 
+function createExpansion(name) {
+	var div = document.createElement('div');
+	div.id = name+"Expansion";
+	div.style.border = '1px solid black';
+	div.style.position= 'absolute';
+	div.style.display = 'none';
+	document.body.appendChild(div);
+	return div;
+}
 
 </script>
 <script
@@ -44,19 +75,27 @@ function toggleMe(id){
   </div>
   {% for item in lifts%}
     <div class=liftLinks>
-		
-		<a id = "{{ 'liftLink' + loop.index0|string }}" href = "javascript:void(0);" 
-			onclick="	toggleMe({{ loop.index0 }});
-						<!--turn json obj into string-->
+		</script>
+		<a id = "{{ 'liftLink' + loop.index0|string }}" style = "position:relative;" href = "javascript:void(0);" 
+			onclick="	
+						toggleMe('{{ item }}');
+						lastPressed = '{{ item }}';
+						//turn json obj into string
 						var data = JSON.stringify({'name': '{{ item }}' });
-						console.log(data);
-						jQuery.post('/action_page', data, function(data) { console.log('callback' + data) });
+						jQuery.post('/action_page', data, function(data) { return true; });
 					">
 			{{ item }}
 		</a>
+		
+		<!--javascript that instantiates a div instead of below-->
+		<script>
+			document.getElementById('{{ 'liftLink' + loop.index0|string }}')
+				.appendChild(createExpansion('{{ item }}'));
+		
+		</script>
 	</div>
 	{% endfor %}
-	<div id = "expansion" style = "display:none"></div>
+<!--	<div id = "expansion" style = "display:none"></div>-->
 
 	{% block body %}{% endblock %}
 </div>
