@@ -1,6 +1,7 @@
 var lastPressed = "";
 
 function toggle(item){
+	var mainButton = document.getElementById(item + 'Link');
 	var clicked = document.getElementById(item+'Expansion');
 	var lastClicked = "";
 	if (lastPressed != "") {
@@ -12,10 +13,12 @@ function toggle(item){
 	//our first click
 	if (lastClicked == "") { 
 		clicked.appendChild(content);
-		clicked.style.display = "inline-block"
+		mainButton.style.fontWeight = "bold";
+		clicked.style.display = "inline-block";
 
 	//nothing is currently opened
 	} else if (lastClicked.style.display == "none") {
+		mainButton.style.fontWeight = "bold";
 		clicked.appendChild(content);
 		clicked.style.display = "inline-block";
  
@@ -23,11 +26,13 @@ function toggle(item){
 	} else if (lastClicked.style.display == "inline-block") {
 		//we reclicked our last click
 		if (clicked == lastClicked) {
+			mainButton.style.fontWeight = "normal";
 			lastClicked.style.display = "none";
 			lastClicked.innerHTML = "";
  
 		//and we clicked something else
 		} else if (clicked != lastClicked) {
+			mainButton.style.fontWeight = "normal";
 			lastClicked.style.display = "none";
 			lastClicked.innerHTML = "";
 			clicked.appendChild(content);
@@ -41,10 +46,8 @@ function toggle(item){
 function createExpansion(name) {
 	var div = document.createElement('div');
 	div.id = name+"Expansion";
-	div.style.border = '1px solid black';
-	div.style.position= 'relative';
+	div.className = 'secondaryLinks';
 	div.onmouseup = dynamicEvent; //todo: eentuallyt his is the elements of the expansion
-	div.style.display = 'none';
 	document.body.appendChild(div);
 	return div;
 }

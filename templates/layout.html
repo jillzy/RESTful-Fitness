@@ -7,9 +7,9 @@
 </script>
 <script src="{{url_for('static', filename='scripts.js')}}"></script>
 			  
-<title>be a fit person</title>
+<title>athletes of the chiller society</title>
 
-
+<h3>A.C.S.</h3>
 <div class=page>
 	<div class=metanav>
 		{% if not session.logged_in %}
@@ -22,20 +22,24 @@
 	<div id= "liftLinksContainer">
 	{% for item in lifts%}
 		
-		<a id = "{{ 'liftLink' + loop.index0|string }}" class = "mainLinks" href = "javascript:void(0);" 
-			onclick="	
-						toggle('{{ item }}');
-						//turn json obj into string
-						var data = JSON.stringify({'name': '{{ item }}' });
-						jQuery.post('/action_page', data, function(data) { return true; });
-					">
+		<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
+			onmouseenter=	"	
+							toggle('{{ item }}');
+							//turn json obj into string
+							var data = JSON.stringify({'name': '{{ item }}' });
+							jQuery.post('/action_page', data, function(data) { return true; });
+							"
+			onmouseleave=	"
+							toggle('{{ item }}');
+							"
+		>
 			{{ item }}
 		</a>
 		
 		<script>
 			document.getElementById('liftLinksContainer')
-				.appendChild(document.getElementById('{{ "liftLink" + loop.index0|string }}'));		
-			document.getElementById('{{ "liftLink" + loop.index0|string }}')
+				.appendChild(document.getElementById('{{ item + 'Link' }}'));		
+			document.getElementById('{{ item + 'Link' }}')
 				.appendChild(createExpansion('{{ item }}'));		
 		</script>
 	{% endfor %}

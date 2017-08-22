@@ -3,27 +3,46 @@ body {
 }
 
 
-
-
 #liftLinksContainer {
 
-	border: 1px dotted blue;
-	height: 200px;
+	background-color: #000;
 	margin: auto;
-	width: 100px;
+	padding: 25px;
+	width: 25%;
 }
 
 .mainLinks {
+	border-radius: 15px;
+	border: 5px solid #f15025;
+	text-align: center;
+	width: 100%;
+	box-sizing: border-box;
 	text-decoration: none;
+	background-color: #e6e8e6;
 	display:inline-block;
-	color: black;
-	border: 1px dotted pink;
-	margin-bottom: 10px;
-	width:inherit;
+	color: #000000;
+	margin-bottom: 20px;
+	padding: 10px 0px;
+
 }
 
 .mainLinks:hover {
 	font-style:italic;
+}
+
+.secondaryLinks {
+	margin: auto;
+	font-style:normal;
+	font-weight: normal;
+	position: relative;
+	padding: 7px;
+	box-sizing: border-box;
+	width: 100%;
+	display: none;
+}
+
+.secondaryLinks:hover {
+	background-color: #ced0ce;
 }
 /*
 .page {
