@@ -42,7 +42,7 @@
 				
 				if (secondaryLinkText != "") {
 					document.getElementById(item + 'Link')
-						.appendChild(createExpansion(item));
+						.appendChild(createExpansionContainer(item));
 				}
 				
 				var mainButton = document.getElementById(item + 'Link');
@@ -72,7 +72,7 @@
 		<script>
 			document.getElementById('liftLinksContainer')
 				.appendChild(document.getElementById('{{ item + 'Link' }}'));	
-			createExpansion('{{ item }}')					
+			//createExpansionContainer('{{ item }}')					
 		</script>
 	{% endfor %}
 	</div>

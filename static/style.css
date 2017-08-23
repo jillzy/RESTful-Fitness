@@ -29,6 +29,16 @@ body {
 	font-style:italic;
 }
 
+.expansionContainer {
+	margin: auto;
+	font-style:normal;
+	font-weight: normal;
+	position: relative;
+	box-sizing: border-box;
+	width: 100%;
+	display: none;
+}
+
 .secondaryLinks {
 	margin: auto;
 	font-style:normal;
@@ -37,7 +47,6 @@ body {
 	padding: 7px;
 	box-sizing: border-box;
 	width: 100%;
-	display: none;
 }
 
 .secondaryLinks:hover {
