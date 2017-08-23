@@ -17,19 +17,15 @@ function toggleOn(item){
 				var secondaryLinkDiv = createSecondaryLink(i);
 				var content = document.createTextNode(dict[key][i]);
 				secondaryLinkDiv.appendChild(content);
-				console.log("append '" + content.textContent + "' to "
-					+ secondaryLinkDiv.id);
-
 				expansionContainer.appendChild(secondaryLinkDiv);
-				console.log("append " + secondaryLinkDiv.id + " to "
-					+ expansionContainer.id);
+
 			}
 
 		}
 		
 	}
 	
-	mainButton.style.fontWeight = "bold";
+//	mainButton.style.fontWeight = "bold";
 	expansionContainer.style.display = "inline-block";
 
 }
@@ -50,7 +46,7 @@ function toggleOff(item){
 
 function getVariationsandToggleOn(item) {
 	var data = JSON.stringify({'name': item });
-	jQuery.post('/action_page', data, function(data) { return true; })
+	jQuery.post('/get_variations', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
 			handleData(data);
 			toggleOn(item);
@@ -68,7 +64,6 @@ function createExpansionContainer(name) {
 	var div = document.createElement('div');
 	div.id = name+"ExpansionContainer";
 	div.className = 'expansionContainer';
-	//div.onmouseup = dynamicEvent; //todo: eentuallyt his is the elements of the expansion
 	document.body.appendChild(div);
 	return div;
 }
@@ -78,10 +73,14 @@ function createSecondaryLink(i) {
 	div.id = "SecondaryLink"+i;
 	div.className = 'secondaryLinks';
 	div.onmouseup = dynamicEvent;
-	//document.body.appendChild(div);
 	return div;
 }
 
 function dynamicEvent() {
-	alert("works");
+	console.log(this.id);
+	var data = JSON.stringify({'name': this.id});
+	jQuery.post('/click_variation', data, function(data) { return true; })
+		.done(function(data, textStatus, jqXHR) {
+			console.log(data);
+		});
 }
