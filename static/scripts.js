@@ -1,8 +1,17 @@
 var secondaryLinkData = "";
 var data;
+var allLinks = [];
 
 function toggleOn(item){
 	
+	/*if (previous != ""){
+		toggleOff(previous);
+	}*/
+	for (var i = 0; i < allLinks.length; i++) {
+		if (item != allLinks[i]) {
+			toggleOff(allLinks[i]);
+		}
+	}
 	var mainButton = document.getElementById(item + 'Link');
 	
 	if (secondaryLinkData != "") {
@@ -32,12 +41,11 @@ function toggleOn(item){
 
 
 function toggleOff(item){
-
 	var mainButton = document.getElementById(item + 'Link');
 	if (document.getElementById(item+'ExpansionContainer') != null) {
 		var expansionContainer = document.getElementById(item+'ExpansionContainer');
-			expansionContainer.style.display = "none";
 			expansionContainer.innerHTML = "";
+			expansionContainer.style.display = "none";
 	}
 	mainButton.style.fontWeight = "normal";
 
@@ -45,6 +53,7 @@ function toggleOff(item){
 }
 
 function getVariationsandToggleOn(item) {
+	//turn json obj into string
 	var data = JSON.stringify({'name': item });
 	jQuery.post('/get_variations', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
@@ -77,10 +86,8 @@ function createSecondaryLink(i) {
 }
 
 function dynamicEvent() {
-	console.log(this.id);
 	var data = JSON.stringify({'name': this.id});
 	jQuery.post('/click_variation', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
-			console.log(data);
 		});
 }

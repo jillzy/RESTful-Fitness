@@ -21,53 +21,14 @@
 	{% for item in lifts%}
 		
 		<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
-			onmouseenter=	"	
-								//turn json obj into string
-								/*var data = JSON.stringify({'name': '{{ item }}' });
-								jQuery.post('/action_page', data, function(data) { return true; })
-									.done(function(data, textStatus, jqXHR) {
-										handleData(data);
-									});*/
-								//toggleOn('{{ item }}');
-								getVariationsandToggleOn('{{ item }}');
-							"
-			
+			onmouseenter=	"getVariationsandToggleOn('{{ item }}');"			
 			onmouseleave=	"toggleOff('{{ item }}');">
 			
-			<!--<script> 
-			document.getElementById('{{ item }} + Link').mouseenter(function(){
-				console.log("secondaryLinkText is: " + secondaryLinkText);
-				
-				if (secondaryLinkText != "") {
-					document.getElementById(item + 'Link')
-						.appendChild(createExpansionContainer(item));
-				}
-				
-				var mainButton = document.getElementById(item + 'Link');
-				var clicked = document.getElementById(item+'Expansion');
-				var content = document.createTextNode(secondaryLinkText);
-				
-				mainButton.style.fontWeight = "bold";
-				clicked.innerHTML = "";
-				clicked.appendChild(content);
-				clicked.style.display = "inline-block";
-				
-				lastPressed = item;
-			})
-			.mouseleave(function() {
-				console.log("doesns't do shit");
-				var mainButton = document.getElementById(item + 'Link');
-				var clicked = document.getElementById(item+'Expansion');
-
-				mainButton.style.fontWeight = "normal";
-				clicked.style.display = "none";
-				clicked.innerHTML = "";
-			});	
-			</script>-->
 			{{ item }}
 		</a>
 		
 		<script>
+			allLinks.push('{{ item }}');
 			document.getElementById('liftLinksContainer')
 				.appendChild(document.getElementById('{{ item + 'Link' }}'));	
 			//createExpansionContainer('{{ item }}')					
