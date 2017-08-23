@@ -1,4 +1,5 @@
 var lastPressed = "";
+var secondaryLinkText = "";
 
 function toggle(item){
 	var mainButton = document.getElementById(item + 'Link');
@@ -56,3 +57,9 @@ function dynamicEvent() {
 	alert("works");
 }
 
+function handleData(data) {
+	//var div = document.createElement('div');
+	//append as a child in expansion
+	console.log(data);
+	secondaryLinkText = data;
+}

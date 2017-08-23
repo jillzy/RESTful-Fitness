@@ -21,9 +21,11 @@ def action():
     for v in variations:
         for k in data:
             if data[k] == v:
-                return json.dumps(variations[v])
+                res = {v: variations[v]}
+                # turns json back into str
+                print("this is what im returning: "+json.dumps(res))
+                return json.dumps(res)
     return "none"
-    #turns json back into str
     #return json.dumps(data)
 
 
