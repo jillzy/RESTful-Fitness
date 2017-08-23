@@ -1,48 +1,38 @@
 var lastPressed = "";
-var secondaryLinkText = "";
+var secondaryLinkText = "default";
 
-function toggle(item){
+function toggleOn(item){
+	document.getElementById(item + 'Link')
+		.appendChild(createExpansion(item));	
+	
 	var mainButton = document.getElementById(item + 'Link');
 	var clicked = document.getElementById(item+'Expansion');
-	var lastClicked = "";
-	if (lastPressed != "") {
-		lastClicked = document.getElementById(lastPressed+'Expansion');
-		console.log(lastPressed+'Expansion');
-	}
-	var content = document.createTextNode(item + "variations");
+	var content = document.createTextNode(secondaryLinkText);
 	
-	//our first click
-	if (lastClicked == "") { 
-		clicked.appendChild(content);
-		mainButton.style.fontWeight = "bold";
-		clicked.style.display = "inline-block";
-
-	//nothing is currently opened
-	} else if (lastClicked.style.display == "none") {
-		mainButton.style.fontWeight = "bold";
-		clicked.appendChild(content);
-		clicked.style.display = "inline-block";
- 
-	//something is currently opened
-	} else if (lastClicked.style.display == "inline-block") {
-		//we reclicked our last click
-		if (clicked == lastClicked) {
-			mainButton.style.fontWeight = "normal";
-			lastClicked.style.display = "none";
-			lastClicked.innerHTML = "";
- 
-		//and we clicked something else
-		} else if (clicked != lastClicked) {
-			mainButton.style.fontWeight = "normal";
-			lastClicked.style.display = "none";
-			lastClicked.innerHTML = "";
-			clicked.appendChild(content);
-			clicked.style.display = "inline-block";
- 
-		}
-	}
+	mainButton.style.fontWeight = "bold";
+	clicked.innerHTML = "";
+	clicked.appendChild(content);
+	clicked.style.display = "inline-block";
+	
 	lastPressed = item;
 }
+
+
+function toggleOff(item){
+
+	var mainButton = document.getElementById(item + 'Link');
+	var clicked = document.getElementById(item+'Expansion');
+	
+	mainButton.style.fontWeight = "normal";
+	clicked.style.display = "none";
+	clicked.innerHTML = "";
+
+}
+
+
+
+
+
 
 function createExpansion(name) {
 	var div = document.createElement('div');

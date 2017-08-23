@@ -30,19 +30,20 @@
 									.done(function(data, textStatus, jqXHR) {
 										handleData(data);
 									});
-								toggle('{{ item }}');
+								toggleOn('{{ item }}');
 							"
 			
-			onmouseleave=	"toggle('{{ item }}');"
+			onmouseleave=	"toggleOff('{{ item }}');"
 		>
 			{{ item }}
 		</a>
 		
 		<script>
 			document.getElementById('liftLinksContainer')
-				.appendChild(document.getElementById('{{ item + 'Link' }}'));		
-			document.getElementById('{{ item + 'Link' }}')
-				.appendChild(createExpansion('{{ item }}'));		
+				.appendChild(document.getElementById('{{ item + 'Link' }}'));	
+			createExpansion('{{ item }}')				
+/*			document.getElementById('{{ item + 'Link' }}')
+				.appendChild(createExpansion('{{ item }}'))*/;		
 		</script>
 	{% endfor %}
 	</div>
