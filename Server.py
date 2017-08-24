@@ -21,11 +21,10 @@ def get_variations():
                                "Stiff Leg", "Straight Leg", "Sumo"],
                   "Squat": ["Bulgarian Split", "High Bar", "Low Bar"]}
     for v in variations:
-        for k in data:
-            if data[k] == v:
-                res = {v: variations[v]}
-                # turns json back into str
-                return json.dumps(res)
+        if data["name"] == v:
+            res = {v: variations[v]}
+            # turns json back into str
+            return json.dumps(res)
     return "none"
     #return json.dumps(data)
 
@@ -37,8 +36,14 @@ def index():
 
 @app.route('/click_variation', methods=['POST'])
 def click_variation():
-    print ("/click_variation")
-    return "clicked stuff"
+
+    
+    data = json.loads(request.get_data())
+    print(data["name"])
+    return data["name"]
+
+
+
 
 
 

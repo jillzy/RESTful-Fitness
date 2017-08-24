@@ -1,9 +1,18 @@
-html,body,.page {
+html,body{
 	font-family: sans-serif;
 	background: #eee;
 	padding: 0;
 	width: 100%;
 	margin: 0;
+	height: 100%;
+}
+
+.page {
+	min-width: 500px;
+	width: 100%;
+	box-sizing: border-box;	
+	border: 1px solid red;
+	height: 100%;
 }
 
 .metanav{
@@ -14,7 +23,15 @@ html,body,.page {
 #liftLinksContainer {
 	position: relative;
 	box-sizing: border-box;
+	margin-bottom: 50px;
 	
+}
+
+#content {
+	position: fixed;
+	min-width: 500px;
+	width: 500px;
+	padding: 10px;
 }
 
 .mainLinks {
@@ -34,6 +51,8 @@ html,body,.page {
 }
 
 .expansionContainer {
+	z-index: 1;
+	position: absolute;
 	padding: 5px 0px;
 	background-color:white;
 	max-width: 90%;

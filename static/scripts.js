@@ -24,7 +24,7 @@ function toggleOn(item){
 		
 		for (var key in dict){
 			for (var i = 0; i < dict[key].length; i++) {
-				var secondaryLinkDiv = createSecondaryLink(i);
+				var secondaryLinkDiv = createSecondaryLink(dict[key][i]);
 				var content = document.createTextNode(dict[key][i]);
 				secondaryLinkDiv.appendChild(content);
 				expansionContainer.appendChild(secondaryLinkDiv);
@@ -78,17 +78,20 @@ function createExpansionContainer(name) {
 	return div;
 }
 
-function createSecondaryLink(i) {
+function createSecondaryLink(name) {
 	var div = document.createElement('div');
-	div.id = "SecondaryLink"+i;
+	div.id = name; //the secondary links are just named whatever their text is
 	div.className = 'secondaryLinks';
-	div.onmouseup = dynamicEvent;
+	div.onmouseup = clickSecondaryLink;
 	return div;
 }
 
-function dynamicEvent() {
+function clickSecondaryLink() {
+	var div = document.getElementById('content');
 	var data = JSON.stringify({'name': this.id});
 	jQuery.post('/click_variation', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
+			console.log(data);
+			div.innerHTML = data;
 		});
 }

@@ -14,17 +14,17 @@
 		{% for item in lifts%}
 		
 			<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
-				onmouseenter=	"getVariationsandToggleOn('{{ item }}');"			
-				onmouseleave=	"toggleOff('{{ item }}');">
+				onmouseenter = "getVariationsandToggleOn('{{ item }}');"			
+				onmouseleave = "toggleOff('{{ item }}');">
 				
 				{{ item }}
 			</a>
-			
 			<script>
 				allLinks.push('{{ item }}');
 				document.getElementById('liftLinksContainer')
 					.appendChild(document.getElementById('{{ item + 'Link' }}'));					
 			</script>
+
 		{% endfor %}
 	
 		<div class=mainLinks>
@@ -34,8 +34,12 @@
 		<a href="{{ url_for('logout') }}">log out</a>
 		{% endif %}
 		</div>
-	
+		
 	</div>
 	
 	{% block body %}{% endblock %}
+	
+	<div id = "content">
+		WHY IT NO STYLEEE
+	</div>
 </div>
