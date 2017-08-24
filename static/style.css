@@ -1,11 +1,9 @@
 html,body,.page {
-	font-family: sans-serif; background: #eee;
-	margin: 0;
+	font-family: sans-serif;
+	background: #eee;
 	padding: 0;
-	height: 100vh;
-	/*min-height: 100vh !important;*/
 	width: 100%;
-
+	margin: 0;
 }
 
 .metanav{
@@ -14,23 +12,19 @@ html,body,.page {
 
 
 #liftLinksContainer {
-	/*background-color: #36151e;
-	padding: 25px;
-	min-height: 100%;*/
-	width: 100%;
-	overflow: hidden;
+	position: relative;
 	box-sizing: border-box;
 	
 }
 
 .mainLinks {
 	vertical-align:top;
-	font-size: 20px;
+	font-size: 22px;
 	text-align: center;
-	width: 8%;
+	min-width: 8%;
 	text-decoration: none;
 	display:inline-block;
-	color: black;
+	color: #111;
 	padding: 10px;
 	margin: -3px;
 }
@@ -40,30 +34,24 @@ html,body,.page {
 }
 
 .expansionContainer {
-	border: 1px solid black;
-	width: 100%;
-	margin-top:100px;
-	box-sizing:border-box;
-	margin: auto;
-	margin-top: 10px;
-	font-style:normal;
-	font-weight: normal;
-	position: relative;
+	padding: 5px 0px;
+	background-color:white;
+	max-width: 90%;
+	margin-top: 8px;
 	display: none;
+	border: 1px solid #111;
 }
 
 .secondaryLinks {
-	font-size:15px;
+	overflow-wrap: normal;
+	font-size:16px;
 	font-style:normal;
-	font-weight: normal;
-	position: relative;
-	padding: 7px;
-	box-sizing: border-box;
-	width: 100%;
+	padding: 3px 5px;
+
 }
 
 .secondaryLinks:hover {
-	background-color: #8499b1;
+	background-color: #ccc;
 }
 /*
 .page {

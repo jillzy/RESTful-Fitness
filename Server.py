@@ -16,9 +16,9 @@ def get_variations():
     #print(data)
     #print(type(data))
     variations = {"Bench": ['Bench Press', 'Incline Bench', 'Dumbbell Press'],
-                  "Deadlift": ["American Deadlift", "Conventional Deadlift",
-                               "Sumo Deadlift", "Romanian Deadlift", "Single Leg RDL",
-                               "Stiff Leg", "Straight Leg"],
+                  "Deadlift": ["American", "Conventional",
+                               "Romanian", "Single Leg RDL",
+                               "Stiff Leg", "Straight Leg", "Sumo"],
                   "Squat": ["Bulgarian Split", "High Bar", "Low Bar"]}
     for v in variations:
         for k in data:

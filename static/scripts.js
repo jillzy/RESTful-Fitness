@@ -36,7 +36,7 @@ function toggleOn(item){
 	}
 	
 //	mainButton.style.fontWeight = "bold";
-	expansionContainer.style.display = "inline-block";
+	expansionContainer.style.display = /*inline-*/"block";
 
 }
 
