@@ -19,6 +19,7 @@ function toggleOn(item){
 			.appendChild(createExpansionContainer(item));
 		
 		var expansionContainer = document.getElementById(item+'ExpansionContainer');
+		expansionContainer.innerHTML = "";
 		var dict = JSON.parse(secondaryLinkData);
 		
 		for (var key in dict){
