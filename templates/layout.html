@@ -9,31 +9,31 @@
 
 <title> ACS </title>
 <div class=page>
-	<div class=metanav>
+	<div id= "liftLinksContainer">
+		{% for item in lifts%}
+		
+			<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
+				onmouseenter=	"getVariationsandToggleOn('{{ item }}');"			
+				onmouseleave=	"toggleOff('{{ item }}');">
+				
+				{{ item }}
+			</a>
+			
+			<script>
+				allLinks.push('{{ item }}');
+				document.getElementById('liftLinksContainer')
+					.appendChild(document.getElementById('{{ item + 'Link' }}'));					
+			</script>
+		{% endfor %}
+	
+		<div class=mainLinks>
 		{% if not session.logged_in %}
 		<a href="{{ url_for('login') }}">log in</a>
 		{% else %}
 		<a href="{{ url_for('logout') }}">log out</a>
 		{% endif %}
-	</div>
+		</div>
 	
-	<div id= "liftLinksContainer">
-	{% for item in lifts%}
-		
-		<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
-			onmouseenter=	"getVariationsandToggleOn('{{ item }}');"			
-			onmouseleave=	"toggleOff('{{ item }}');">
-			
-			{{ item }}
-		</a>
-		
-		<script>
-			allLinks.push('{{ item }}');
-			document.getElementById('liftLinksContainer')
-				.appendChild(document.getElementById('{{ item + 'Link' }}'));	
-			//createExpansionContainer('{{ item }}')					
-		</script>
-	{% endfor %}
 	</div>
 	
 	{% block body %}{% endblock %}

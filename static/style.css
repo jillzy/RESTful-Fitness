@@ -14,11 +14,12 @@ html,body,.page {
 
 
 #liftLinksContainer {
-	background-color: #36151e;
-	/*padding: 25px;
+	/*background-color: #36151e;
+	padding: 25px;
 	min-height: 100%;*/
 	width: 100%;
 	overflow: hidden;
+	box-sizing: border-box;
 	
 }
 
@@ -26,22 +27,25 @@ html,body,.page {
 	vertical-align:top;
 	font-size: 20px;
 	text-align: center;
-	width: 10%;
+	width: 8%;
 	text-decoration: none;
-	background-color: #7b6d8d;
 	display:inline-block;
-	color: #a5c4d4;
-	padding: 10px 0px;
+	color: black;
+	padding: 10px;
+	margin: -3px;
 }
 
 .mainLinks:hover {
 	font-style:italic;
-	text-decoration: underline;
 }
 
 .expansionContainer {
+	border: 1px solid black;
 	width: 100%;
+	margin-top:100px;
+	box-sizing:border-box;
 	margin: auto;
+	margin-top: 10px;
 	font-style:normal;
 	font-weight: normal;
 	position: relative;
