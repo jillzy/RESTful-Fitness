@@ -87,13 +87,25 @@ function createSecondaryLink(name) {
 }
 
 function clickSecondaryLink() {
-	var div = document.getElementById('player');
+	var contentDiv = document.getElementById('content');
 	var data = JSON.stringify({'name': this.id});
+	var url = "";
 	jQuery.post('/click_variation', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
 			console.log(data);
-			div.innerHTML = data;
-			var url = "https://www.youtube.com/embed/" + data;
-			div.setAttribute('src', url);
+			contentDiv.innerHTML = data;
+			var dict = JSON.parse(data);
+			for (var key in dict){
+				for (var i = 0; i < dict[key].length; i++) {
+					url = "https://www.youtube.com/embed/" + dict[key][i];
+					var div = document.createElement("iframe");
+					div.setAttribute("src", url);
+					div.style.width = "200px";
+					div.style.height = "100px";
+					contentDiv.appendChild(div);
+				}
+			}
+			//var url = "https://www.youtube.com/embed/" + data;
+			//div.setAttribute('src', url);
 		});
 }

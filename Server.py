@@ -40,7 +40,7 @@ def click_variation():
                         "Incline Bench": [''],
                         "Dumbbell Press": [''],
                         "American": [''],
-                        "Conventional": ['u6UgD1H_AXw'],
+                        "Conventional": ['u6UgD1H_AXw','u6UgD1H_AXw'],
                         "Romanian": [''],
                         "Single Leg RDL": [''],
                         "Stiff Leg": [''],
