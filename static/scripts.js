@@ -87,11 +87,13 @@ function createSecondaryLink(name) {
 }
 
 function clickSecondaryLink() {
-	var div = document.getElementById('content');
+	var div = document.getElementById('player');
 	var data = JSON.stringify({'name': this.id});
 	jQuery.post('/click_variation', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
 			console.log(data);
 			div.innerHTML = data;
+			var url = "https://www.youtube.com/embed/" + data;
+			div.setAttribute('src', url);
 		});
 }
