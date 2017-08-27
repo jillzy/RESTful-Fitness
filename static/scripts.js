@@ -87,21 +87,21 @@ function createSecondaryLink(name) {
 }
 
 function clickSecondaryLink() {
+	//todo: clear elements from other links
 	var contentDiv = document.getElementById('content');
 	var data = JSON.stringify({'name': this.id});
 	var url = "";
 	jQuery.post('/click_variation', data, function(data) { return true; })
 		.done(function(data, textStatus, jqXHR) {
 			console.log(data);
-			contentDiv.innerHTML = data;
 			var dict = JSON.parse(data);
 			for (var key in dict){
 				for (var i = 0; i < dict[key].length; i++) {
+					console.log(dict[key][i]);
 					url = "https://www.youtube.com/embed/" + dict[key][i];
 					var div = document.createElement("iframe");
 					div.setAttribute("src", url);
-					div.style.width = "200px";
-					div.style.height = "100px";
+					div.className = "player";
 					contentDiv.appendChild(div);
 				}
 			}
