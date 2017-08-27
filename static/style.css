@@ -15,7 +15,6 @@ html,body{
 	width: 100%;
 	box-sizing: border-box;	
 	border: 1px solid red;
-	height: 100%;
 }
 
 .metanav{
@@ -31,7 +30,6 @@ html,body{
 }
 
 #content {
-	position: fixed;
 	min-width: 500px;
 	width: 500px;
 	padding: 10px;
