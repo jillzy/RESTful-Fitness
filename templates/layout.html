@@ -11,9 +11,15 @@
 <div class=page>
 
 	<div id= "liftLinksContainer">
+	
+		
+			
+
+		<span class = "tab">view tutorials</span>	
+		
 		{% for item in lifts%}
 		
-			<a id = "{{ item + 'Link' }}" class = "mainLinks" href = "javascript:void(0);" 
+			<a id = "{{ item + 'Link' }}" class = "exerciseLinks" href = "javascript:void(0);" 
 				onmouseenter = "getVariationsandToggleOn('{{ item }}');"			
 				onmouseleave = "toggleOff('{{ item }}');">
 				
@@ -26,15 +32,16 @@
 			</script>
 
 		{% endfor %}
-	
-		<div class=mainLinks>
+		<!--
 		{% if not session.logged_in %}
 		<a href="{{ url_for('login') }}">log in</a>
 		{% else %}
 		<a href="{{ url_for('logout') }}">log out</a>
 		{% endif %}
-		</div>
+		-->
 		
+	
+
 	</div>
 	
 	{% block body %}{% endblock %}

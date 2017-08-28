@@ -89,6 +89,7 @@ function createSecondaryLink(name) {
 function clickSecondaryLink() {
 	//todo: clear elements from other links
 	var contentDiv = document.getElementById('content');
+	contentDiv.innerHTML = "";
 	var data = JSON.stringify({'name': this.id});
 	var url = "";
 	jQuery.post('/click_variation', data, function(data) { return true; })
@@ -100,6 +101,8 @@ function clickSecondaryLink() {
 					console.log(dict[key][i]);
 					url = "https://www.youtube.com/embed/" + dict[key][i];
 					var div = document.createElement("iframe");
+					div.style.width = '450px';
+					div.style.margin = '0px 10px';
 					div.setAttribute("src", url);
 					div.className = "player";
 					contentDiv.appendChild(div);

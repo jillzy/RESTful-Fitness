@@ -43,6 +43,26 @@ def click_variation():
     from apiclient.discovery import build
     from apiclient.errors import HttpError
 
+
+
+    data = json.loads(request.get_data())
+    content_data =  {   "Bench Press": ['bench press tutorial'],
+                        "Incline Bench": ['incline bench tutorial'],
+                        "Dumbbell Press": ['how to dumbbell press'],
+                        "American": ['american deadlift tutorial'],
+                        "Conventional": ['conventional deadlift tutorial'],
+                        "Romanian": ['romanian deadlift tutorial'],
+                        "Single Leg RDL": ['how to single leg deadlift'],
+                        "Stiff Leg": ['stiff leg deadlift tutorial'],
+                        "Straight Leg": ['straight leg dead lift tutorial'],
+                        "Sumo": ['how to sumo deadlift'],
+                        "Bulgarian Split": ['bulgarian split squat tutorial'],
+                        "High Bar": ['how to squat highbar'],
+                        "Low Bar": ['how to squat lowbar']}
+    for cd in content_data:
+        if data["name"] == cd:
+            query = content_data[cd]
+
     dict = {"videoIDs": []}
 
     # Set DEVELOPER_KEY to the API key value from the APIs & auth > Registered apps
@@ -60,9 +80,9 @@ def click_variation():
     # Call the search.list method to retrieve results matching the specified
     # query term.
     search_response = youtube.search().list(
-        q='cat',#options.q,
+        q=query,#options.q,
         part="id,snippet",
-        maxResults=5#options.max_results
+        maxResults=4#options.max_results
     ).execute()
 
     videos = []
@@ -76,37 +96,14 @@ def click_variation():
             dict["videoIDs"].append(search_result["id"]["videoId"])
             videos.append("%s (%s)" % (search_result["snippet"]["title"],
                                        search_result["id"]["videoId"]))
-        elif search_result["id"]["kind"] == "youtube#channel":
-            channels.append("%s (%s)" % (search_result["snippet"]["title"],
-                                         search_result["id"]["channelId"]))
-        elif search_result["id"]["kind"] == "youtube#playlist":
-            playlists.append("%s (%s)" % (search_result["snippet"]["title"],
-                                          search_result["id"]["playlistId"]))
+
 
     print "Videos:\n", "\n".join(videos), "\n"
-    print "Channels:\n", "\n".join(channels), "\n"
-    print "Playlists:\n", "\n".join(playlists), "\n"
     print()
     print json.dumps(dict)
 
     return json.dumps(dict)
 
-            # data = json.loads(request.get_data())
-    # content_data =  {   "Bench Press": [''],
-    #                     "Incline Bench": [''],
-    #                     "Dumbbell Press": [''],
-    #                     "American": [''],
-    #                     "Conventional": ['u6UgD1H_AXw','u6UgD1H_AXw'],
-    #                     "Romanian": [''],
-    #                     "Single Leg RDL": [''],
-    #                     "Stiff Leg": [''],
-    #                     "Straight Leg": [''],
-    #                     "Sumo": [''],
-    #                     "Bulgarian Split": [''],
-    #                     "High Bar": [''],
-    #                     "Low Bar": ['']}
-    # for cd in content_data:
-    #     if data["name"] == cd:
     #         res = {"Tags": content_data[cd]}
     #         return json.dumps(res)
     # return "none"
