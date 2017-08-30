@@ -7,7 +7,22 @@ app.config['SECRET_KEY'] = 'secret!'
 
 @app.route('/login')
 def login():
-    return render_template('login.html')
+    lifts = ['Bench', 'Deadlift', 'Squat'];
+    return render_template('login.html', lifts=lifts)
+#    return render_template('login.html')
+
+@app.route('/submitLogin', methods=['POST'])
+def submitLogin():
+    print "/submitLogin"
+    data = request.form
+    u = data.get('username', default= None, type = None)
+    p = data.get('password', default= None, type = None)
+    if (u == "user" and p == "pass"):
+        return "logged in"
+    else:
+        return "403"
+    return "none"
+
 
 
 @app.route('/get_variations', methods=['POST'])

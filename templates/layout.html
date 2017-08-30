@@ -32,18 +32,15 @@
 			</script>
 
 		{% endfor %}
-		<!--
-		{% if not session.logged_in %}
-		<a href="{{ url_for('login') }}">log in</a>
-		{% else %}
-		<a href="{{ url_for('logout') }}">log out</a>
-		{% endif %}
-		-->
 		
-	
+		{% if not session.logged_in %}
+		<a class = "userMenu" href ="{{ url_for('login') }}">Log In</a>
+		{% else %}
+		<a class = "userMenu" href="{{ url_for('logout') }}">Log Out</a>
+		{% endif %}
 
 	</div>
-	
+		
 	{% block body %}{% endblock %}
 	
 	<div id = "content">

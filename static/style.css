@@ -6,35 +6,54 @@ html,body{
 	height: 100%;
 }
 .tab{
+	border-right: 2px solid black;
+	padding: 1px 7px;
 	font-style: italic;
 	font-family: serif;
-	margin-left: -10px;
-	width: 100px;
-	border-right: 7px solid black;
+	position: relative;
 	color: white;
-	padding: 10px;
 	background-color: red;
+	font-size: 22px;
+	text-align: center;
+	min-width: 8%;
+	margin: -1px;
 }
 .player {
 	height: 280px;
 }
 .page {
-	min-width: 1000px;
+	min-width: 500px;
 	width: 100%;
 }
 
+.loginPanel {
+	border: 1px solid red;
+	width: 200px;
+}
 
 #liftLinksContainer {
 	position: relative;
 	box-sizing: border-box;
 	margin-bottom: 50px;
+	background-color: white;
 }
 
 #content {
-	width: 1000px;
 	padding: 10px;
 }
 
+.userMenu {
+	font-size: 22px;
+	color: black;
+	text-decoration: none;
+	font-weight: bold;
+	border-left: 2px solid black;
+	padding: 1px 15px;
+}
+
+.userMenu:hover{
+	font-style: italic;
+}
 .exerciseLinks {
 	position: relative;
 	vertical-align:top;
@@ -44,7 +63,7 @@ html,body{
 	text-decoration: none;
 	display:inline-block;
 	color: #111;
-	padding: 10px;
+	/*padding: 10px;*/
 	margin: -1px;
 }
 
@@ -57,10 +76,8 @@ a.exerciseLinks:hover {
 	position: absolute;
 	padding: 5px 0px;
 	background-color:white;
-	max-width: 90%;
-	margin-top: 8px;
+	max-width: 100%;
 	display: none;
-	border: 1px solid #111;
 }
 
 .secondaryLinks {
@@ -68,6 +85,7 @@ a.exerciseLinks:hover {
 	font-size:16px;
 	font-style:normal;
 	padding: 3px 5px;
+	margin: 5px 0;
 
 }
 
