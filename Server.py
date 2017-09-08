@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import json
 from flask_mysqldb import MySQL
 
@@ -12,9 +12,11 @@ app.config['MYSQL_PASSWORD'] = 'FLASK123!'
 app.config['MYSQL_DB'] = "exercise_log"
 mysql = MySQL(app)
 
+lifts = ['Bench', 'Deadlift', 'Squat'];
+logged_in = False;
+
 @app.route('/login')
 def login():
-    lifts = ['Bench', 'Deadlift', 'Squat'];
     return render_template('login.html', lifts=lifts)
 #    return render_template('login.html')
 
@@ -24,11 +26,14 @@ def submitLogin():
     data = request.form
     u = data.get('username', default= None, type = None)
     p = data.get('password', default= None, type = None)
+
     if (u == "user" and p == "pass"):
-        return "logged in"
+        logged_in = True;
     else:
         return "403"
-    return "none"
+#    return render_template('layout.html', lifts=lifts, logged_in = logged_in)
+
+    return redirect(url_for('index'), logged_in=logged_in)
 
 
 
@@ -57,9 +62,6 @@ def index():
     cur = mysql.connection.cursor()
     cur.execute('''SELECT * from exercises''')
     rv = cur.fetchall()
-    return str(rv)
-
-    rv = "hi"
     lifts = ['Bench', 'Deadlift', 'Squat']
     return render_template('layout.html', lifts=lifts, rv = rv)
 

@@ -1,13 +1,13 @@
 html,body{
 	font-family: sans-serif;
-	background: #eee;
+	background: #f5f5f5;
 	width: 100%;
 	margin: 0;
 	height: 100%;
 }
 .tab{
 	border-right: 2px solid black;
-	padding: 1px 7px;
+	padding: 6px;
 	font-style: italic;
 	font-family: serif;
 	position: relative;
@@ -32,10 +32,12 @@ html,body{
 }
 
 #liftLinksContainer {
+	vertical-align:top;
+	padding: 5px 0px;
 	position: relative;
 	box-sizing: border-box;
 	margin-bottom: 50px;
-	background-color: white;
+	background-color: #e5e5e5;
 }
 
 #content {
@@ -47,7 +49,6 @@ html,body{
 	color: black;
 	text-decoration: none;
 	font-weight: bold;
-	border-left: 2px solid black;
 	padding: 1px 15px;
 }
 
@@ -56,7 +57,6 @@ html,body{
 }
 .exerciseLinks {
 	position: relative;
-	vertical-align:top;
 	font-size: 22px;
 	text-align: center;
 	min-width: 8%;
@@ -75,7 +75,7 @@ a.exerciseLinks:hover {
 	z-index: 1;
 	position: absolute;
 	padding: 5px 0px;
-	background-color:white;
+	background-color:#e5e5e5;
 	max-width: 100%;
 	display: none;
 }

@@ -9,13 +9,12 @@
 
 <title> ACS </title>
 <div class=page>
-	{{ rv }}
 	<div id= "liftLinksContainer">
 	
 		
 			
 
-		<span class = "tab">view tutorials</span>	
+		<span class = "tab">view tutorials:</span>	
 		
 		{% for item in lifts%}
 		
@@ -33,10 +32,13 @@
 
 		{% endfor %}
 		
-		{% if not session.logged_in %}
-		<a class = "userMenu" href ="{{ url_for('login') }}">Log In</a>
+		
+		{% if not logged_in %}	
+		<a class = "userMenu" style = "float:right"href ="{{ url_for('login') }}">Log In</a>
+		
 		{% else %}
-		<a class = "userMenu" href="{{ url_for('logout') }}">Log Out</a>
+		<a class = "userMenu" style = "float:right">My Exercise Log</a>
+		<a class = "userMenu" style = "float:right" href="{{ url_for('login') }}">Log Out</a>
 		{% endif %}
 
 	</div>
@@ -44,5 +46,6 @@
 	{% block body %}{% endblock %}
 	
 	<div id = "content">
+		{{ rv }}
 	</div>
 </div>
