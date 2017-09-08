@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, session, redirect, url_for, escape, request
 import json
 from flask_mysqldb import MySQL
 
@@ -13,12 +13,17 @@ app.config['MYSQL_DB'] = "exercise_log"
 mysql = MySQL(app)
 
 lifts = ['Bench', 'Deadlift', 'Squat'];
-logged_in = False;
+
 
 @app.route('/login')
 def login():
     return render_template('login.html', lifts=lifts)
-#    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    session['logged_in'] = False
+    return redirect(url_for('index'))
+
 
 @app.route('/submitLogin', methods=['POST'])
 def submitLogin():
@@ -29,11 +34,11 @@ def submitLogin():
 
     if (u == "user" and p == "pass"):
         logged_in = True;
+        session['logged_in'] = True;
     else:
         return "403"
-#    return render_template('layout.html', lifts=lifts, logged_in = logged_in)
 
-    return redirect(url_for('index'), logged_in=logged_in)
+    return redirect(url_for('index'))
 
 
 
@@ -58,7 +63,6 @@ def get_variations():
 
 @app.route('/')
 def index():
-
     cur = mysql.connection.cursor()
     cur.execute('''SELECT * from exercises''')
     rv = cur.fetchall()
