@@ -1,9 +1,16 @@
+# -*- coding: utf-8 -*-
+
 from flask import Flask, render_template, request
 import json
-
+from flask_mysqldb import MySQL
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret!'
+app.config['MYSQL_HOST'] = '127.0.0.1'
+app.config['MYSQL_USER'] = 'flask'
+app.config['MYSQL_PASSWORD'] = 'FLASK123!'
+app.config['MYSQL_DB'] = "exercise_log"
+mysql = MySQL(app)
 
 @app.route('/login')
 def login():
@@ -46,8 +53,15 @@ def get_variations():
 
 @app.route('/')
 def index():
-    lifts = ['Bench', 'Deadlift', 'Squat'];
-    return render_template('layout.html', lifts=lifts)
+
+    cur = mysql.connection.cursor()
+    cur.execute('''SELECT * from exercises''')
+    rv = cur.fetchall()
+    return str(rv)
+
+    rv = "hi"
+    lifts = ['Bench', 'Deadlift', 'Squat']
+    return render_template('layout.html', lifts=lifts, rv = rv)
 
 @app.route('/click_variation', methods=['POST'])
 def click_variation():
@@ -57,8 +71,6 @@ def click_variation():
 
     from apiclient.discovery import build
     from apiclient.errors import HttpError
-
-
 
     data = json.loads(request.get_data())
     content_data =  {   "Bench Press": ['bench press tutorial'],
