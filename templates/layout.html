@@ -37,15 +37,17 @@
 		<a class = "userMenu" href ="{{ url_for('login') }}">Log In</a>
 		
 		{% else %}
-		<a class = "userMenu">My Exercise Log</a>
+		<a class = "userMenu" href ="{{ url_for('showLog') }}">My Exercise Log</a>
 		<a class = "userMenu" href="{{ url_for('logout') }}">Log Out</a>
 		{% endif %}
 
 	</div>
 		
 	{% block body %}{% endblock %}
-	
-	<div id = "content">
-		{{ rv }}
+
+		{{ name }}
+		{{ sets }}
+		{{ reps }}
+		{{ weight }}
 	</div>
 </div>

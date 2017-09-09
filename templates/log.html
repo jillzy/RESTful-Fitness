@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+	<form class = "loginPanel" action="{{ url_for('updateLog') }}" method=post>
+	<dl>
+	  <dt>Exercise:
+	  <dd><input type=text name=name>
+	  <dt>Sets:
+	  <dd><input type=text name=sets>
+	  <dt>Reps:
+	  <dd><input type=text name=reps>
+	  <dt>Weight: 
+	  <dd><input type=text name=weight>
+	  <dd><input type=submit value="Add new entry">
+	</dl>
+  </form>
+{% endblock %}

@@ -112,3 +112,17 @@ function clickSecondaryLink() {
 			//div.setAttribute('src', url);
 		});
 }
+
+
+function parseStr(str) {
+	//		console.log(str = str.replace(/[^a-zA-Z]/g, ''));
+	str = str.replace(/\s+/g, '+');
+	str = str.replace(/[^0-9a-zA-Z+]/g, "");
+	str = str.substring(1);
+	str = str.split("+u");
+	console.log(str);
+	for (var i = 0; i < n.length; i++ ) {
+			console.log(i+ ": " + n[i] + w[i]);
+	}
+	return str;
+}

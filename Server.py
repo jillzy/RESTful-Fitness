@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+
 from flask import Flask, render_template, session, redirect, url_for, escape, request
 import json
 from flask_mysqldb import MySQL
@@ -13,6 +14,7 @@ app.config['MYSQL_DB'] = "exercise_log"
 mysql = MySQL(app)
 
 lifts = ['Bench', 'Deadlift', 'Squat'];
+
 
 
 @app.route('/login')
@@ -41,6 +43,38 @@ def submitLogin():
     return redirect(url_for('index'))
 
 
+@app.route('/updateLog', methods=['POST'])
+def updateLog():
+    print "/updateLog"
+    data = request.form
+    name = data.get('name', default= None, type = None)
+    sets = data.get('sets', default= None, type = None)
+    reps = data.get('reps', default= None, type = None)
+    weight = data.get('weight', default= None, type = None)
+    print weight
+
+    return redirect(url_for('showLog'))
+
+
+
+
+
+@app.route('/exercise_log')
+def showLog():
+    cur = mysql.connection.cursor()
+
+    cur.execute('SELECT name from exercises')
+    name = cur.fetchall()
+    cur.execute('SELECT sets from exercises')
+    sets = cur.fetchall()
+    cur.execute('SELECT reps from exercises')
+    reps = cur.fetchall()
+    cur.execute('SELECT weight from exercises')
+    weight = cur.fetchall()
+
+    return render_template('log.html', lifts=lifts, name = name,
+                           sets = sets, reps = reps, weight = weight)
+
 
 @app.route('/get_variations', methods=['POST'])
 def get_variations():
@@ -63,11 +97,10 @@ def get_variations():
 
 @app.route('/')
 def index():
-    cur = mysql.connection.cursor()
-    cur.execute('''SELECT * from exercises''')
-    rv = cur.fetchall()
+
     lifts = ['Bench', 'Deadlift', 'Squat']
-    return render_template('layout.html', lifts=lifts, rv = rv)
+    return render_template('layout.html', lifts=lifts)
+
 
 @app.route('/click_variation', methods=['POST'])
 def click_variation():
